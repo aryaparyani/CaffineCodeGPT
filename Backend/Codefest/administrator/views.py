@@ -40,7 +40,9 @@ def home(request, slug):
     return JsonResponse({"appointment_details" : details})
 
 def getTherapist(request):
-    return HttpResponse("Get therapist details")
+    therapist_details = list(Therapist.objects.values())
+    print(therapist_details)
+    return JsonResponse({"therapist_details": therapist_details})
 
 def addTherapist(request):
     return HttpResponse("Add Therapist details")
