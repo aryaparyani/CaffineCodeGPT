@@ -55,12 +55,12 @@ def checkOut(request, slug):
         return JsonResponse({"output" : "DB updated"})
     else:
         return JsonResponse({"output" : "DB not updated"})
-
-def sos(request):
+    
+def sos(request, slug):
     # creates SMTP session
-    sender_email_id = "listening_ear1@outlook.com"
-    sender_email_id_password = "Hello@12345"
-    receiver_email_id = "administrator.models.email"
+    sender_email_id = "earlistening622@gmail.com"
+    sender_email_id_password = "hpys hliy dczy qaky"
+    receiver_email_id = "priyankaasrani1202@gmail.com"
 
     s = smtplib.SMTP('smtp.gmail.com', 587)
     
@@ -68,14 +68,18 @@ def sos(request):
     s.starttls()
     
     # Authentication
-    s.login("sender_email_id", "sender_email_id_password")
+    s.login(sender_email_id, sender_email_id_password)
     
     # message to be sent
     message = "Help I am in Danger!"
     
     # sending the mail
-    s.sendmail("sender_email_id", "receiver_email_id", message)
+    s.sendmail(sender_email_id, receiver_email_id, message)
     
     # terminating the session
     s.quit()
+
+    #update_db=Appointment.objects.filter(appointment_id=slug).update(status='Alert')
+
     return HttpResponse("SOS")
+
