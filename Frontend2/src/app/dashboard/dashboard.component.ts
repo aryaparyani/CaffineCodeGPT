@@ -2,22 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router, ActivatedRoute} from '@angular/router';
+import { SharedService } from '../shared.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  // export datafromDatabase: any[];
   AppointDetails: any;
    upcoming: any[] =[];
    ongoing: any[] =[];
    alert: any[] =[];
-
+   datafromdatabase: any[]=[];
   constructor(
+    
     private http: HttpClient,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private sharedService:SharedService
+  ) { this.datafromdatabase= this.sharedService.sharedVariable;}
   httpOptions= {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -81,14 +85,21 @@ export class DashboardComponent implements OnInit {
       seq2 = 0;
   };
   ngOnInit() {
-    this.getAppointDetails()
-      // /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
-      // const dataFromDatabase = [
-      //   { id: 1, startTime: '2023-10-12T03:50:00', endTime: '2023-10-15T14:00:00', otherFields: '...' },
-      //   { id: 2, startTime: '2023-10-12T01:00:00', endTime: '2023-10-12T02:00:00', otherFields: '...' },
-      //   { id: 3, startTime: '2023-10-12T00:01:00', endTime: '2023-10-12T00:03:00', otherFields: '...' }
-      //   // ...
-      // ];
+
+
+    setTimeout(() => {
+      // Reload the page
+      window.location.reload();
+    }, 300000);
+  
+    // this.getAppointDetails()
+      /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
+      const dataFromDatabase = [
+        { id: 1, startTime: '2023-10-12T03:50:00', endTime: '2023-10-15T14:00:00', otherFields: '...' },
+        { id: 2, startTime: '2023-10-12T01:00:00', endTime: '2023-10-12T02:00:00', otherFields: '...' },
+        { id: 3, startTime: '2023-10-12T00:01:00', endTime: '2023-10-12T00:03:00', otherFields: '...' }
+        // ...
+      ];
 
     
       
@@ -101,7 +112,7 @@ export class DashboardComponent implements OnInit {
        this.alert = [];
 
       
-      this.AppointDetails.forEach(item => {
+      dataFromDatabase.forEach(item => {
         const startTime = new Date(item.startTime);
         const endTime = new Date(item.endTime);
         
@@ -204,24 +215,26 @@ export class DashboardComponent implements OnInit {
       // //start animation for the Emails Subscription Chart
       // this.startAnimationForBarChart(websiteViewsChart);
   }
-  getAppointDetails(){
-    this.http.get("http://127.0.0.1:8000/administrator/2",
-    this.httpOptions
-    ).subscribe(
-      (data: any) => {
-        if (data !== undefined) {
-          console.log(data);
-          // const  dets= JSON.parse(data)
-          this.AppointDetails= data
+  // getAppointDetails(){
+  //   this.http.get("http://127.0.0.1:8000/administrator/2",
+  //   this.httpOptions
+  //   ).subscribe(
+  //     (data: any) => {
+  //       if (data !== undefined) {
+  //         console.log(data);
+  //         // const  dets= JSON.parse(data)
+  //         this.AppointDetails= data.appointment_details
 
-          console.log(this.AppointDetails)
+
+
+  //         console.log(this.AppointDetails)
           
           
-        }
-      },
-      (error: any) => {
-        console.log("error")
-      }
-    );
-  }
+  //       }
+  //     },
+  //     (error: any) => {
+  //       console.log("error")
+  //     }
+  //   );
+  // }
 }

@@ -38,11 +38,11 @@
           <div class="col-lg-4 col-md-6 col-sm-6">
               <div class="card card-stats">
                   <div class="card-header card-header-danger card-header-icon">
-                      <div class="card-icon">
+                      <div class="card-icon" style="background: rgb(249, 81, 81) !important;">
                           <i class="material-icons">info_outline</i>
                       </div>
                       <!-- <p class="card-category">Fixed Issues</p> -->
-                      <h3 class="card-title">Completed</h3>
+                      <h3 class="card-title">Need Help</h3>
                   </div>
                   <div class="card-footer">
                       <div class="stats">
@@ -125,7 +125,7 @@
                                   <tr *ngFor="let item of ongoing; let i= index">
                                       <td>{{ item.id }}</td>
                                       <td>{{ item.startTime | date: 'medium' }}</td>
-                                      <td>
+                                      <!-- <td>
                                         <div class="form-check">
                                             <label class="form-check-label">
                                                 <input class="form-check-input" type="checkbox" value="">
@@ -134,7 +134,7 @@
                                                 </span>
                                             </label>
                                         </div>
-                                    </td>
+                                    </td> -->
                                       <!-- Add other data columns here -->
                                   </tr>
                               </tbody>
@@ -171,8 +171,8 @@
                                   
                               </thead>
                               <tbody>
-                                  <tr *ngFor="let item of alert; let i= index">
-                                      <td>{{ item.id }}</td>
+                                  <tr *ngFor="let item of AppointDetails; let i= index">
+                                      <td>{{ item.appointment_id }}</td>
                                       <td>{{ item.startTime | date: 'medium' }}</td>
                                       
                                       <!-- Add other data columns here -->

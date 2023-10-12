@@ -26,14 +26,14 @@ export class TableListComponent implements OnInit {
     this.getTherapistDetails()
   }
   getTherapistDetails(){
-    this.http.get("http://127.0.0.1:8000/administrator/2",
+    this.http.get("http://127.0.0.1:8000/administrator/getTherapist/all",
     this.httpOptions
     ).subscribe(
       (data: any) => {
         if (data !== undefined) {
           console.log(data);
           // const  dets= JSON.parse(data)
-          this.therapistDetails= data.appointment_details[0].therapist_data
+          this.therapistDetails= data.therapist_details
 
           console.log(this.therapistDetails)
           
