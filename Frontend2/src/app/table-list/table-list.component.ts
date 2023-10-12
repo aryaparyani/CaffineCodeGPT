@@ -32,7 +32,12 @@ export class TableListComponent implements OnInit {
       (data: any) => {
         if (data !== undefined) {
           console.log(data);
-          this.getTherapistDetails= data;
+          // const  dets= JSON.parse(data)
+          this.therapistDetails= data.appointment_details[0].therapist_data
+
+          console.log(this.therapistDetails)
+          
+          
         }
       },
       (error: any) => {
